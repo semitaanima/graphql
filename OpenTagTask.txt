@@ -1,0 +1,63 @@
+GraphQL URL Endpoint - https://graphql.org/swapi-graphql
+
+query getAllSpeciesFromNewHope {
+  allFilms(first: 1) {
+  pageInfo{startCursor},
+    films{title},
+    edges{
+      node{
+        speciesConnection{
+          species{
+            name, classification
+          },
+          totalCount
+        }
+      }
+    }
+      }
+    }
+    
+#We need to obtain the ID of the Droid species in order to obtain the info in the query below
+query getDroidInfoId {
+  allSpecies(first:100) {
+    species{
+      name,id
+    }
+  }
+}
+
+query getDroidUniqueInfo {
+  species(id: "c3BlY2llczoy") {
+    id, name, eyeColors, homeworld{name}
+  }
+}
+
+query getTotalPeopleCountFromNewHope {
+  allFilms(first: 1) {
+  pageInfo{startCursor},
+    films{title},
+    edges{
+      node{
+        characterConnection{
+          characters{
+            id, name, gender
+          },
+          totalCount
+          }
+        }
+      }
+   } 
+ }
+
+query getInfoForId4FromNewHope {
+  person(personID:4){
+    name, birthYear, homeworld {
+      id
+    }, eyeColor,
+    starshipConnection{      
+      starships{
+        name
+      }
+    }
+  }
+ }
